@@ -1,0 +1,69 @@
+body {
+	margin: 0;
+}
+
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: -5px;
+
+	color: #fff;
+	background: #000;
+	width: 100%;
+}
+.titulo {
+	cursor: default;
+	font-size: 40px;
+	margin-bottom: 20px;
+	margin-right: 250px;	
+}
+.navInicio, .navFavoritos {
+	margin-left: 40px;
+	cursor: pointer; 
+}
+
+main {
+	margin: 150px 200px;
+	padding: 50px;
+
+	background: #bbb;
+	border: 3px solid #000;
+}
+div {
+	font-size: 30px;
+	height: 250px;
+	width: 200px;
+	margin: 15px auto;
+	padding: 10px;
+	text-align: center;
+
+	background: #fff;
+	border: 4px double #000;
+	border-radius: 10px;
+
+}
+button {
+	font-size: 18px;
+	padding: 10px;
+	margin-top: 35px;
+	border-radius: 12px;
+
+	background: #000;
+	color: #fff;
+	
+}
+button:hover {
+	color: #666;
+}
+.inter {
+	position: relative;
+	top: -600px;
+
+	color: #fff;
+}
+
+#favoritos, .menuFavoritos {
+	display: none;
+}
