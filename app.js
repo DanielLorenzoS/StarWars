@@ -48,58 +48,49 @@ let extraerDatos = e => {
   		
 }
 extraerDatos();
-
-
-const interseccion = document.querySelector('.inter');
-
-const nuevoScroll = (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-			extraerDatos();
-			ejecutarEnvios();
-		}
-    }
-    
-const observador = new IntersectionObserver(nuevoScroll);
-    
-observador.observe(interseccion);
+extraerDatos();
 
 const favs = document.querySelector('.menuFavoritos');
-
+let count = 2;
 let wait = (num) => {
 
 	let elemento = setTimeout(function (){
-		let añadir = document.querySelector(`.btn${num}`);
-		let tarjeta = document.querySelector(`.tarjeta${num}`);
+			let añadir = document.querySelectorAll(`.btn${num}`);
+			let tarjeta = document.querySelector(`.tarjeta${num}`);
 
-		añadir.addEventListener('click', () => {
-			let text = tarjeta.innerHTML;
-			favs.style.display = 'grid';
-			let copiaTarjeta = document.createElement('div');
-			copiaTarjeta.setAttribute('class', `nuevaTarjeta${num}`);
-			copiaTarjeta.innerHTML = text;
+			for (var i = 0; i < count; i++) {
+				
+			añadir[i].addEventListener('click', () => {
+				let text = tarjeta.innerHTML;
+				favs.style.display = 'grid';
+				let copiaTarjeta = document.createElement('div');
+				copiaTarjeta.setAttribute('class', `nuevaTarjeta${num}`);
+				copiaTarjeta.innerHTML = text;
 
-			let remover = document.createElement('button')
-  			remover.setAttribute('class', `remove${num}`);
-  			remover.innerHTML = 'Quitar de favoritos'
+				let remover = document.createElement('button')
+  				remover.setAttribute('class', `remove${num}`);
+  				remover.innerHTML = 'Quitar de favoritos'
 
-			favs.appendChild(copiaTarjeta)
-			favs.appendChild(remover)
+				favs.appendChild(copiaTarjeta)
+				favs.appendChild(remover)
 	
-			let remove = document.querySelector(`.remove${num}`);
+				let remove = document.querySelector(`.remove${num}`);
 
-			remove.addEventListener('click', () => {
-				favs.removeChild(copiaTarjeta)
-				favs.removeChild(remover)
-				if (favs.childNodes.length == 1) {
-					favs.style.display = 'none';
-				}
+				remove.addEventListener('click', () => {
+					favs.removeChild(copiaTarjeta)
+					favs.removeChild(remover)
+					if (favs.childNodes.length == 1) {
+						favs.style.display = 'none';
+					}
+				});
 			});
-		});
+		
+		}
 	},2000);
 }
 
-let ejecutarEnvios = () => {
+let activate = () => {
+
 	wait('0');
 	wait('1');
 	wait('2');
@@ -109,6 +100,21 @@ let ejecutarEnvios = () => {
 	wait('6');
 	wait('7');
 	wait('8');
-	wait('9');
+	wait('9');	
 }
-ejecutarEnvios()
+activate()
+
+const interseccion = document.querySelector('.inter');
+
+const nuevoScroll = (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+			extraerDatos();
+			count++;
+			activate();
+		}
+    }
+    
+const observador = new IntersectionObserver(nuevoScroll);
+    
+observador.observe(interseccion);
