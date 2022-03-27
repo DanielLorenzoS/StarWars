@@ -41,7 +41,7 @@ let extraerDatos = e => {
   			añadir.innerHTML = 'Añadir a favoritos'
 
   			main.appendChild(nuevaTarjeta)
-  			nuevaTarjeta.appendChild(añadir)
+  			main.appendChild(añadir)
   		}  		
   	}
 
@@ -55,8 +55,8 @@ const interseccion = document.querySelector('.inter');
 const nuevoScroll = (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
-			extraerDatos()
-
+			extraerDatos();
+			ejecutarEnvios();
 		}
     }
     
@@ -64,20 +64,51 @@ const observador = new IntersectionObserver(nuevoScroll);
     
 observador.observe(interseccion);
 
-
 const favs = document.querySelector('.menuFavoritos');
 
-const elemento = () => {
-	let añadir = document.querySelector('.btn0');
-	let tarjeta = document.querySelector('.tarjeta0');
+let wait = (num) => {
 
-	añadir.addEventListener('click', () => {
-		let clon = tarjeta.cloneNode(true);
-		favs.appendChild(clon);
-		favs.style.display = 'block';
-	});
+	let elemento = setTimeout(function (){
+		let añadir = document.querySelector(`.btn${num}`);
+		let tarjeta = document.querySelector(`.tarjeta${num}`);
+
+		añadir.addEventListener('click', () => {
+			let text = tarjeta.innerHTML;
+			favs.style.display = 'grid';
+			let copiaTarjeta = document.createElement('div');
+			copiaTarjeta.setAttribute('class', `nuevaTarjeta${num}`);
+			copiaTarjeta.innerHTML = text;
+
+			let remover = document.createElement('button')
+  			remover.setAttribute('class', `remove${num}`);
+  			remover.innerHTML = 'Quitar de favoritos'
+
+			favs.appendChild(copiaTarjeta)
+			favs.appendChild(remover)
+	
+			let remove = document.querySelector(`.remove${num}`);
+
+			remove.addEventListener('click', () => {
+				favs.removeChild(copiaTarjeta)
+				favs.removeChild(remover)
+				if (favs.childNodes.length == 1) {
+					favs.style.display = 'none';
+				}
+			});
+		});
+	},2000);
 }
-setTimeout(elemento, 2000);
 
-
-
+let ejecutarEnvios = () => {
+	wait('0');
+	wait('1');
+	wait('2');
+	wait('3');
+	wait('4');
+	wait('5');
+	wait('6');
+	wait('7');
+	wait('8');
+	wait('9');
+}
+ejecutarEnvios()
