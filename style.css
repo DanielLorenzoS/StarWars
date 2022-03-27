@@ -27,6 +27,8 @@ header {
 main {
 	margin: 150px 200px;
 	padding: 50px;
+	display: grid;
+  	justify-content: center;
 
 	background: #bbb;
 	border: 3px solid #000;
@@ -47,10 +49,12 @@ div {
 button {
 	font-size: 18px;
 	padding: 10px;
+	margin: 15px 10px;
 	margin-top: 35px;
 	border-radius: 12px;
 
-	background: #000;
+
+	background: #0F6700;
 	color: #fff;
 	
 }
@@ -64,6 +68,18 @@ button:hover {
 	color: #fff;
 }
 
-#favoritos, .menuFavoritos {
+.menuFavoritos {
+	display: grid;
+  	justify-content: center;
 	display: none;
+}
+.menuFavoritos button {
+	font-size: 18px;
+	padding: 10px;
+	margin: 15px 10px;
+	margin-top: 35px;
+	border-radius: 12px;
+
+	color: #fff;
+	background: #F00;
 }
