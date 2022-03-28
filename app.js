@@ -52,6 +52,7 @@ extraerDatos();
 
 const favs = document.querySelector('.menuFavoritos');
 let count = 2;
+let index = 0;
 let wait = (num) => {
 
 	let elemento = setTimeout(function (){
@@ -64,23 +65,25 @@ let wait = (num) => {
 				let text = tarjeta.innerHTML;
 				favs.style.display = 'grid';
 				let copiaTarjeta = document.createElement('div');
-				copiaTarjeta.setAttribute('class', `nuevaTarjeta${num}`);
+				copiaTarjeta.setAttribute('class', `nuevaTarjeta${index}`);
 				copiaTarjeta.innerHTML = text;
-
+				index++;
+				
 				let remover = document.createElement('button')
-  				remover.setAttribute('class', `remove${num}`);
+  				remover.setAttribute('class', `remove${index}`);
   				remover.innerHTML = 'Quitar de favoritos'
 
 				favs.appendChild(copiaTarjeta)
 				favs.appendChild(remover)
 	
-				let remove = document.querySelector(`.remove${num}`);
+				let remove = document.querySelector(`.remove${index}`);
 
 				remove.addEventListener('click', () => {
 					favs.removeChild(copiaTarjeta)
 					favs.removeChild(remover)
 					if (favs.childNodes.length == 1) {
 						favs.style.display = 'none';
+						index = 0;
 					}
 				});
 			});
