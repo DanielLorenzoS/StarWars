@@ -2,6 +2,7 @@ const inicio = document.getElementById('inicio');
 const favoritos = document.getElementById('favoritos');
 const navInicio = document.querySelector('.navInicio');
 const navFavoritos = document.querySelector('.navFavoritos');
+let piv = false;
 
 navInicio.addEventListener('click', () => {
 	inicio.style.display = 'block';
@@ -19,8 +20,11 @@ const main = document.getElementById('menuPrincipal');
 let extraerDatos = e => {
 	fetch(URL)
   		.then(response => response.json())
-  		.then(people => extraccion(people))
-  		
+  		.then(people => {
+  			extraccion(people)
+  			piv = true;
+  			trie()
+  		})
 
   	const extraccion= (people) => {
   		for (var i = 0; i <= people.results.length-1; i++) {
@@ -43,6 +47,7 @@ let extraerDatos = e => {
   			main.appendChild(nuevaTarjeta)
   			main.appendChild(añadir)
   		}  		
+
   	}
 
   		
@@ -51,6 +56,7 @@ extraerDatos();
 extraerDatos();
 
 const favs = document.querySelector('.menuFavoritos');
+
 let count = 2;
 let index = 0;
 let wait = (num) => {
@@ -68,7 +74,7 @@ let wait = (num) => {
 				copiaTarjeta.setAttribute('class', `nuevaTarjeta${index}`);
 				copiaTarjeta.innerHTML = text;
 				index++;
-				
+
 				let remover = document.createElement('button')
   				remover.setAttribute('class', `remove${index}`);
   				remover.innerHTML = 'Quitar de favoritos'
@@ -89,11 +95,10 @@ let wait = (num) => {
 			});
 		
 		}
-	},4000);
+	},1000);
 }
 
 let activate = () => {
-
 	wait('0');
 	wait('1');
 	wait('2');
@@ -105,7 +110,12 @@ let activate = () => {
 	wait('8');
 	wait('9');	
 }
-activate()
+
+let trie = () => {
+	!piv ? piv.innerHTML = 'Cargando...' : activate()
+}
+trie()
+
 
 const interseccion = document.querySelector('.inter');
 
@@ -114,7 +124,7 @@ const nuevoScroll = (entries) => {
         if (entry.isIntersecting) {
 			extraerDatos();
 			count++;
-			activate();
+			trie()
 		}
     }
     
