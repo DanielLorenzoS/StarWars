@@ -1,0 +1,27 @@
+@media only screen and (max-width: 750px) {
+	main {
+		background: none;
+		border: none;
+	}
+	.titulo {
+		margin-right: 0;
+		font-size: 30px;
+	}
+	.navInicio, .navFavoritos {
+		
+		margin-left: 5px;
+		padding: 0 7px;
+		border-left: 2px solid #fff;
+	}
+}
+@media only screen and (max-width: 430px) {
+	header {
+		font-size: 10px;
+	}
+	#menuPrincipal {
+		margin: 60px auto;
+	}
+	.menuFavoritos {
+		margin: 60px auto;
+	}
+}
