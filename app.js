@@ -36,9 +36,9 @@ let extraerDatos = e => {
   			let nuevaTarjeta = document.createElement('div');
   			nuevaTarjeta.setAttribute('class', `tarjeta${i}`);
   			nuevaTarjeta.innerHTML = `${name} <br>
-  				  					  ${height} <br> 
-  									  ${mass} <br>
-  									  ${birth} <br>`;
+  				  		${height} <br> 
+  						${mass} <br>
+  						${birth} <br>`;
 
   			let añadir = document.createElement('button')
   			añadir.setAttribute('class', `btn${i}`);
@@ -56,18 +56,17 @@ extraerDatos();
 extraerDatos();
 
 const favs = document.querySelector('.menuFavoritos');
-
 let count = 2;
 let index = 0;
 let wait = (num) => {
-
 	let elemento = setTimeout(function (){
+
 			let añadir = document.querySelectorAll(`.btn${num}`);
 			let tarjeta = document.querySelector(`.tarjeta${num}`);
 
 			for (var i = 0; i < count; i++) {
 				
-			añadir[i].addEventListener('click', () => {
+			añadir[i].addEventListener('click', (e) => {
 				let text = tarjeta.innerHTML;
 				favs.style.display = 'grid';
 				let copiaTarjeta = document.createElement('div');
@@ -81,7 +80,7 @@ let wait = (num) => {
 
 				favs.appendChild(copiaTarjeta)
 				favs.appendChild(remover)
-	
+
 				let remove = document.querySelector(`.remove${index}`);
 
 				remove.addEventListener('click', () => {
@@ -91,11 +90,13 @@ let wait = (num) => {
 						favs.style.display = 'none';
 						index = 0;
 					}
-				});
-			});
-		
+				});	
+				e.preventDefault()
+				e.stopImmediatePropagation()
+				console.log(index)						
+			});	
 		}
-	},1000);
+	},500);
 }
 
 let activate = () => {
@@ -111,8 +112,13 @@ let activate = () => {
 	wait('9');	
 }
 
+let cargando = document.querySelector('.cargando');
+
 let trie = () => {
-	!piv ? piv.innerHTML = 'Cargando...' : activate()
+	if (piv) {
+		cargando.style.display = 'none';
+		activate()	
+	}
 }
 trie()
 
