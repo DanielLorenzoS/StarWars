@@ -92,8 +92,7 @@ let wait = (num) => {
 					}
 				});	
 				e.preventDefault()
-				e.stopImmediatePropagation()
-				console.log(index)						
+				e.stopImmediatePropagation()						
 			});	
 		}
 	},500);
